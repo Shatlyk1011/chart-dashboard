@@ -22,5 +22,23 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
+}
+
+
+.gradient-text {
+  /* Fallback color if gradients / text clipping aren't supported */
+  color: #97FCA6;
+}
+
+/* Use gradient text where supported */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gradient-text {
+    background-image: linear-gradient(155deg, #97FCA6 0%, #F6C90F 100%);
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Chrome / Safari */
+    color: transparent; /* Firefox */
+  }
 }

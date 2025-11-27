@@ -14,17 +14,17 @@ export function CoinSelectComponent({ items, placeholder = 'Select value', onCha
   console.log('placeholder', placeholder);
   return (
     <div className="flex w-full flex-col gap-1">
-      <Select onValueChange={(value) => onChange(value)} value={value} open={true}>
+      <Select onValueChange={(value) => onChange(value)} value={value}>
         <SelectTrigger className={cn("min-w-[210px] bg-[#222] border-none ", classes)}>
           <SelectValue placeholder={placeholder} className="" />
         </SelectTrigger>
-        <SelectContent className="flex border-white/10 rounded-xl">
+        <SelectContent className="flex border-white/10 bg-[#222] rounded-xl">
           <SelectGroup className="">
             {items.map(({ label, value, Icon, multiply  }) => (
               <SelectItem key={value} value={value} className="py-1">
                 <Icon className="mr-1"/>
                 {label}
-                <span className="text-white/50 text-[10px]">{multiply}</span>
+                <span className="text-white/50 text-[12px]">{multiply}</span>
               </SelectItem>
             ))}
           </SelectGroup>
