@@ -9,6 +9,7 @@ import { HeartIcon, Settings } from "lucide-react";
 import { CoinSelectComponent } from "./components/CoinSelectComponent";
 import ConnectButton from "./components/ConnectButton";
 import LineChart from "./components/LineChart";
+import CustomTabs from "./components/CustomTabs";
 
 type CurrentCoin = { latestPrice: null | number, percentDifference: null | number }
 
@@ -37,7 +38,7 @@ export default function Home() {
         <div className="flex gap-2 items-center justify-between">
           <div className="flex items-center gap-2 justify-between">
             {/* <span className="text-white/50">.07</span> */}
-            <h1 className="text-[48px] leading-[120%] ">{currentCoinPrice.latestPrice?.toLocaleString()}</h1>
+            <h1 className="text-[48px] leading-[120%] ">{currentCoinPrice.latestPrice?.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
             <span className={cn("text-3xl leading-[140%]", isMinusPercentage ? 'text-red-600/80' : 'text-[#97FCA6]/90')}>{currentCoinPrice.percentDifference}%</span>
           </div>
 
@@ -52,6 +53,9 @@ export default function Home() {
         </div>
 
         <LineChart selectedCoin={selectedCoinObject!} getLatestCoinPrice={getLatestCoinPrice} />
+        <div>
+          <CustomTabs />
+        </div>
       </section>
     </main>
   );
