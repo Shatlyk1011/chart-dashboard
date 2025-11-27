@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen px-12 py-20 font-sans max-lg:px-6 max-lg:py-16 max-sm:px-3 max-sm:py-10">
       <section className="mx-auto w-full max-w-5xl">
-        <div className="mb-10 flex justify-between">
+        <div className="mb-10 flex justify-between gap-4 max-sm:flex-col">
           <CoinSelectComponent items={COINS} onChange={(val) => setSelectedCoin(val)} value={selectedCoin} />
           <div>
             <ConnectButton />
@@ -39,15 +39,19 @@ export default function Home() {
           {currentCoinPrice.latestPrice && (
             <div className="flex items-center justify-between gap-2">
               {/* <span className="text-white/50">.07</span> */}
-              <h1 className="text-[48px] leading-[120%]">
+              <h1 className="text-[48px] leading-[120%] max-sm:text-[32px]">
                 {currentCoinPrice.latestPrice?.toLocaleString("en-US", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
               </h1>
               <span
-                className={cn("text-3xl leading-[140%]", isMinusPercentage ? "text-red-600/80" : "text-[#97FCA6]/90")}
+                className={cn(
+                  "text-3xl leading-[140%] max-sm:text-xl",
+                  isMinusPercentage ? "text-red-600/80" : "text-[#97FCA6]/90",
+                )}
               >
+                {!isMinusPercentage && "+"}
                 {currentCoinPrice.percentDifference}%
               </span>
             </div>
