@@ -42,3 +42,59 @@ export const COINS: ICoin[] = [
   { label: "LINK/USDC", value: "linkusdc", Icon: Link2, multiply: "20x", min: 222, max: 666 },
   { label: "MATIC/USDT", value: "maticusdt", Icon: Hexagon, multiply: "20x", min: 5000, max: 9000 },
 ];
+
+export const COMMENTS = [
+  {
+    name: "Gabriel",
+    date: "Today at 12:45",
+    action: "Opened Short 100x",
+    color: "#FF8000",
+  },
+  {
+    name: "Dany",
+    date: "Today at 12:45",
+    action: "Opened Short 40x",
+    color: "#97FCA6",
+  },
+  {
+    name: "Test",
+    date: "Today at 12:45",
+    action: "Opened Short 20x",
+    color: "#FF8000",
+  },
+
+  {
+    name: "Test 2",
+    date: "Today at 12:45",
+    action: "Opened Short 60x",
+    color: "#97FCA6",
+  },
+
+  {
+    name: "Test 3",
+    date: "Today at 12:45",
+    action: "Opened Short 40x",
+    color: "#FF8000",
+  },
+
+  {
+    name: "Test 4",
+    date: "Today at 12:45",
+    action: "Opened Short 80x",
+    color: "#97FCA6",
+  },
+
+  {
+    name: "Test 5",
+    date: "Today at 12:45",
+    action: "Opened Short 100x",
+    color: "#FF8000",
+  },
+
+  {
+    name: "Test 6",
+    date: "Today at 12:45",
+    action: "Opened Short 20x",
+    color: "#97FCA6",
+  },
+];

@@ -254,6 +254,8 @@ const useChartData = (
         },
       },
     },
+    responsive: true,
+    aspectRatio: 3 / 1,
   };
 
   return { realMockData, options };

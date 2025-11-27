@@ -5,6 +5,8 @@ import { cn } from '@/app/lib/utils';
 
 interface Props {};
 
+const TEST_ADDRESS = '0xAbC123456789def'
+
 const ConnectButton:FC<Props> = () => {
   const [connect, setConnect] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -14,7 +16,7 @@ const ConnectButton:FC<Props> = () => {
     setTimeout(() => {
       setLoading(false)
       setConnect(true)
-    }, 2000)
+    }, 3500)
   }
 
   return (
@@ -22,8 +24,9 @@ const ConnectButton:FC<Props> = () => {
       {!connect ? (
         <button onClick={handleClick} className={cn("min-h-12  text-nowrap px-5 flex items-center font-medium leading-[140%] text-base rounded-2xl bg-linear-35 from-[#97FCA6]/10 to-[#F6C90F]/10", loading ? 'cursor-[initial]' : 'cursor-pointer')}>
           {loading ? (
-            <div className='w-[114px] box-border'>
-              <Spinner />
+            <div className='w-[114px] flex gap-2 tex-sm items-center box-border'>
+              <Spinner width={24} height={24} />
+              <span className='text-white/50 font-medium'>{TEST_ADDRESS.slice(0, 3)}...{TEST_ADDRESS.slice(-4)}</span>
             </div>
           ) : (
             <span className='gradient-text'>Connect Wallet</span>

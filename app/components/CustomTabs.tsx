@@ -9,7 +9,6 @@ const CustomTabs:FC<Props> = () => {
   const [selected, setSelected] = useState(0)
   const [pagination, setPagination] = useState(0)
 
-  console.log('selected', selected);
   return (
     <div className="flex flex-col gap-5">
       <div className='flex items-center gap-4 overflow-hidden '>

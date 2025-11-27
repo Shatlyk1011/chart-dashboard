@@ -36,13 +36,14 @@ export default function Home() {
         </div>
 
         <div className="flex gap-2 items-center justify-between">
-          <div className="flex items-center gap-2 justify-between">
-            {/* <span className="text-white/50">.07</span> */}
-            <h1 className="text-[48px] leading-[120%] ">{currentCoinPrice.latestPrice?.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
-            <span className={cn("text-3xl leading-[140%]", isMinusPercentage ? 'text-red-600/80' : 'text-[#97FCA6]/90')}>{currentCoinPrice.percentDifference}%</span>
-          </div>
-
-          <div className="flex items-center gap-2">
+          {currentCoinPrice.latestPrice && (
+            <div className="flex items-center gap-2 justify-between">
+              {/* <span className="text-white/50">.07</span> */}
+              <h1 className="text-[48px] leading-[120%] ">{currentCoinPrice.latestPrice?.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
+              <span className={cn("text-3xl leading-[140%]", isMinusPercentage ? 'text-red-600/80' : 'text-[#97FCA6]/90')}>{currentCoinPrice.percentDifference}%</span>
+            </div>
+          )}
+          <div className="flex flex-1 items-center justify-end gap-2">
             <button className="flex items-center justify-center group w-12 h-12 rounded-lg bg-[#222]">
               <HeartIcon className="fill-current group-focus:text-red-400 text-[#646464] group-hover:text-red-400 transition" />
             </button>
@@ -53,9 +54,7 @@ export default function Home() {
         </div>
 
         <LineChart selectedCoin={selectedCoinObject!} getLatestCoinPrice={getLatestCoinPrice} />
-        <div>
-          <CustomTabs />
-        </div>
+        <CustomTabs />
       </section>
     </main>
   );
