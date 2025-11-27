@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "format": "npx prettier --write ."
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.2.6",
@@ -27,6 +28,7 @@
     "eslint": "^9.39.1",
     "eslint-config-next": "15.5.0",
     "tailwindcss": "^4.1.17",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "prettier-plugin-tailwindcss": "^0.7.1"
   }
 }
