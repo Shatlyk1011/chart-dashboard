@@ -59,7 +59,7 @@ const LineChart: FC<Props> = ({ selectedCoin, getLatestCoinPrice }) => {
   }, []);
 
   return (
-    <div className="relative mt-16 mb-20 aspect-3/1 w-full rounded-2xl">
+    <div className="relative mt-16 mb-20 aspect-3/1 w-full rounded-2xl max-sm:mt-10 max-sm:mb-10">
       {realMockData && <Line options={options} data={realMockData} />}
 
       {/* latest comments section */}

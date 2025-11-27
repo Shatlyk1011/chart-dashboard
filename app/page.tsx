@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen px-12 py-20 font-sans">
+    <main className="flex min-h-screen px-12 py-20 font-sans max-lg:px-6 max-lg:py-16 max-sm:px-3 max-sm:py-10">
       <section className="mx-auto w-full max-w-5xl">
         <div className="mb-10 flex justify-between">
           <CoinSelectComponent items={COINS} onChange={(val) => setSelectedCoin(val)} value={selectedCoin} />

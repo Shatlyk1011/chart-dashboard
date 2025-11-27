@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 
 interface Props {}
 
@@ -11,7 +11,7 @@ const CustomTabs: FC<Props> = () => {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-center gap-4 overflow-hidden">
+      <div className="flex items-center gap-4 overflow-hidden max-sm:gap-2">
         {TABS.map((label, idx) => {
           const isSelected = selected === idx;
           return (
@@ -41,7 +41,7 @@ const CustomTabs: FC<Props> = () => {
       </div>
 
       {/* pagination */}
-      <ul className="flex gap-2 self-center">
+      {/* <ul className="flex gap-2 self-center">
         {Array.from({ length: 5 }).map((_, idx) => {
           const isActive = pagination === idx;
 
@@ -57,7 +57,7 @@ const CustomTabs: FC<Props> = () => {
             </li>
           );
         })}
-      </ul>
+      </ul> */}
     </div>
   );
 };
