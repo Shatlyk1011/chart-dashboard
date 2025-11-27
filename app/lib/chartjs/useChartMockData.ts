@@ -51,15 +51,20 @@ const getLabelIndexes = function getIndicesElements(dates: string[]) {
     } else return dates?.map((idx) => dates.indexOf(idx));
   };
 
-const useChartData = (selectedCoin: string) => {
-  const [realMockData, setRealMockData] = useState<ChartData<"line", (number | Point | null)[], unknown>>() 
+const useChartData = (
+  selectedCoin: string,
+  minValue = CHART_MIN_VALUE,
+  maxValue = CHART_MAX_VALUE
+) => {
+  const [realMockData, setRealMockData] =
+    useState<ChartData<"line", (number | Point | null)[], unknown>>();
 
   // Generate an array of mock data
   const generateRandomData = (numDatasets = 1, numPoints = NUM_POINTS) => {
     const getTime = createTimeGenerator();
-    
-    const randomNumbers = (length: number, min = CHART_MIN_VALUE, max = CHART_MAX_VALUE) =>
-    Array.from({ length }, () => Math.floor(Math.random() * (max - min + 1)) + min);
+
+    const randomNumbers = (length: number, min = minValue, max = maxValue) =>
+      Array.from({ length }, () => Math.floor(Math.random() * (max - min + 1)) + min);
     return {
       dates: Array.from({ length: numPoints }, getTime),
       data: Array.from({ length: numDatasets }, () => ({
@@ -71,8 +76,8 @@ const useChartData = (selectedCoin: string) => {
 
   const generateAdditionalData = (numPoints = 1) => {
     const getTime = createTimeGenerator(numPoints);
-    
-    const randomNumbers = (length: number, min = CHART_MIN_VALUE, max = CHART_MAX_VALUE) =>
+
+    const randomNumbers = (length: number, min = minValue, max = maxValue) =>
       Array.from({ length }, () => Math.floor(Math.random() * (max - min + 1)) + min);
     // Generate mock data
     return {
@@ -90,26 +95,26 @@ const useChartData = (selectedCoin: string) => {
 
   const { dates, data } = mockData;
 
-  const chartData: ChartData<'line'> = {
+  const chartData: ChartData<"line"> = {
     labels: dates,
-    
+
     datasets: data.map(({ data, name }) => {
       return {
         backgroundColor: (ctx, _opts) => {
           const { ctx: canvas, chartArea } = ctx.chart;
           if (!chartArea) return undefined;
           const gradient = canvas.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-          gradient.addColorStop(0, 'rgba(255, 200, 0, 0)');
-          gradient.addColorStop(1, 'rgba(255, 200, 0, 0.05)');
+          gradient.addColorStop(0, "rgba(255, 200, 0, 0)");
+          gradient.addColorStop(1, "rgba(255, 200, 0, 0.05)");
           return gradient;
         },
         fill: true,
         tension: 0.1,
-        pointBackgroundColor: 'white',
+        pointBackgroundColor: "white",
         pointRadius: 0,
         label: name,
         data,
-        borderColor: '#ECBD75',
+        borderColor: "#ECBD75",
       };
     }),
   };
@@ -145,7 +150,7 @@ const useChartData = (selectedCoin: string) => {
   }, [selectedCoin]);
 
   // CHART OPTIONS
-  const options: ChartOptions<'line'> = {
+  const options: ChartOptions<"line"> = {
     datasets: {
       line: {
         pointBorderColor: "rgba(0, 0, 0, 0)",
@@ -166,7 +171,7 @@ const useChartData = (selectedCoin: string) => {
       tooltip: {
         titleColor: "#fff",
         backgroundColor: "#222",
-        
+
         borderColor: opacityColor,
         titleFont: { size: 20 },
         bodyFont: {
@@ -188,10 +193,10 @@ const useChartData = (selectedCoin: string) => {
         display: isLabelAvailable,
         position: "top",
         align: "start",
-        onHover: function (e:any) {
+        onHover: function (e: any) {
           e.native.target.style.cursor = "pointer";
         },
-        onLeave: function (e:any) {
+        onLeave: function (e: any) {
           e.native.target.style.cursor = "default";
         },
 
@@ -215,7 +220,7 @@ const useChartData = (selectedCoin: string) => {
           maxTicksLimit: 7,
           color: textColor,
           font: { size: 12 },
-          callback(_: any, index:number) {
+          callback(_: any, index: number) {
             let idxs = getLabelIndexes(dates);
             if (idxs.includes(index)) return dates[index];
             return null;
@@ -227,9 +232,9 @@ const useChartData = (selectedCoin: string) => {
         },
       },
       y: {
-        min: CHART_MIN_VALUE,
-        max: CHART_MAX_VALUE,
-        
+        min: minValue,
+        max: maxValue,
+
         border: {
           color: "rgb(255,255,255,0.1)",
         },
@@ -250,10 +255,8 @@ const useChartData = (selectedCoin: string) => {
       },
     },
   };
-  
 
-  return { realMockData , options }
-
-}
+  return { realMockData, options };
+};
 
 export default useChartData
