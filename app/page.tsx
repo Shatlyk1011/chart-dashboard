@@ -1,19 +1,24 @@
 'use client'
 import { useState } from "react";
 import { COINS } from "@/data";
+
+import { HeartIcon, Settings } from "lucide-react";
+
+//components
 import { CoinSelectComponent } from "./components/CoinSelectComponent";
 import ConnectButton from "./components/ConnectButton";
-import { HeartIcon, Settings } from "lucide-react";
+import LineChart from "./components/LineChart";
 
 export default function Home() {
   const [selectedCoin, setSelectedCoin] = useState(COINS[0].value)
-  console.log('selectedCoin', selectedCoin);
+
+  const selectedCoinLabel = COINS.find(({ value }) => value === selectedCoin)?.label
+
   return (
     <main className="flex min-h-screen font-sans py-20 px-12">
       <section className="max-w-5xl w-full mx-auto ">
         <div className="flex justify-between mb-10">
           <CoinSelectComponent items={COINS} onChange={(val) => setSelectedCoin(val)} value={selectedCoin} />
-
           <div>
             <ConnectButton />
           </div>
@@ -34,6 +39,8 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        <LineChart selectedCoin={selectedCoinLabel!} />
       </section>
     </main>
   );

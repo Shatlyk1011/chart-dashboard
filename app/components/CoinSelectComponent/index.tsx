@@ -11,7 +11,6 @@ interface Props {
 }
 
 export function CoinSelectComponent({ items, placeholder = 'Select value', onChange, value, classes }: Props) {
-  console.log('placeholder', placeholder);
   return (
     <div className="flex w-full flex-col gap-1">
       <Select onValueChange={(value) => onChange(value)} value={value}>
