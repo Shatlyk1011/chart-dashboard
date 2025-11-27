@@ -1,5 +1,6 @@
-import { Bitcoin, ChevronDown } from 'lucide-react';
 import { FC, useState } from 'react';
+
+import { Bitcoin, ChevronDown, Cpu, Dog, Sun } from 'lucide-react';
 import Spinner from '../ui/Spinner';
 import { cn } from '@/app/lib/utils';
 
@@ -7,9 +8,18 @@ interface Props {};
 
 const TEST_ADDRESS = '0xAbC123456789def'
 
+const CURRENCIES = [
+  { label: 'BTC', value: 15000, Icon: Bitcoin },
+  { label: 'ETH', value: 2000, Icon: Cpu },
+  { label: 'DOG', value: 503421, Icon: Dog },
+  { label: 'SOL', value: 828, Icon: Sun },
+]
+
 const ConnectButton:FC<Props> = () => {
-  const [connect, setConnect] = useState(false)
+  const [connect, setConnect] = useState(true)
   const [loading, setLoading] = useState(false)
+
+  const [selectedCurrency, setCurrency] = useState(CURRENCIES[0])
 
   const handleClick = () => {
     setLoading(true)
@@ -33,12 +43,21 @@ const ConnectButton:FC<Props> = () => {
           )}
         </button>
       ) : (
-        <div className='flex items-center '>
-          <button className='h-12  border gap-1 flex items-center border-white/10 border-r-transparent rounded-tl-xl rounded-bl-xl px-2.5'>
-            <Bitcoin className='w-5 h-5' />
-            <span>15.000.00</span>
+          <div className='flex items-center relative'>
+            <button className='h-12 peer min-w-[126px] border gap-1 flex justify-center items-center border-white/10 border-r-transparent rounded-tl-xl rounded-bl-xl px-2.5'>
+              <selectedCurrency.Icon className='w-5 h-5' />
+              <span>{selectedCurrency.value}</span>
             <ChevronDown className='w-4 h-4 text-white/50' />
           </button>
+
+            {/* menu */}
+            <div className='flex flex-col justify-start gap-2 p-3 rounded-lg border border-white/10 bg-[#222] absolute z-10 top-10 opacity-0 transition-all duration-300 invisible select-none peer-focus:opacity-100 peer-focus:visible peer-focus:select-auto left-0 text-sm w-[calc(100%-48px)] *:text-start *:opacity-80'>
+              {CURRENCIES.map((curr) => (
+                <button key={curr.label} onClick={() => setCurrency(curr)} >
+                  {curr.label}: {curr.value.toLocaleString()}
+                </button>
+              ))}
+            </div>
           <button className='bg-linear-135 cursor-pointer rounded-tr-xl rounded-br-xl flex items-center justify-center from-[#97FCA6] h-12 w-12 to-[#F6C90F]'>
               {/* иконка кошелька */}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none" className='w-6 h-6'>
