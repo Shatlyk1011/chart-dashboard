@@ -51,9 +51,9 @@ const ConnectButton:FC<Props> = () => {
           </button>
 
             {/* menu */}
-            <div className='flex flex-col justify-start gap-2 p-3 rounded-lg border border-white/10 bg-[#222] absolute z-10 top-10 opacity-0 transition-all duration-300 invisible select-none peer-focus:opacity-100 peer-focus:visible peer-focus:select-auto left-0 text-sm w-[calc(100%-48px)] *:text-start *:opacity-80'>
+            <div className='flex flex-col justify-start gap-2 p-3 rounded-lg border border-white/10 bg-[#222] absolute z-10 top-10 opacity-0 transition-all duration-300 invisible select-none peer-focus:opacity-100 peer-focus:visible peer-focus:select-auto left-0 text-sm w-[calc(100%-48px)] *:text-start '>
               {CURRENCIES.map((curr) => (
-                <button key={curr.label} onClick={() => setCurrency(curr)} >
+                <button key={curr.label} onClick={() => setCurrency(curr)} className={cn('opacity-60', selectedCurrency.label === curr.label && 'opacity-100 text-white')} >
                   {curr.label}: {curr.value.toLocaleString()}
                 </button>
               ))}
