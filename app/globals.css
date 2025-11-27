@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1B1B1B;
+  --foreground: #1b1b1b;
 }
 
 @theme inline {
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1B1B1B;
+    --background: #1b1b1b;
     --foreground: #fff;
   }
 }
@@ -25,16 +25,15 @@ body {
   font-family: var(--font-sans), sans-serif;
 }
 
-
 .gradient-text {
   /* Fallback color if gradients / text clipping aren't supported */
-  color: #97FCA6;
+  color: #97fca6;
 }
 
 /* Use gradient text where supported */
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .gradient-text {
-    background-image: linear-gradient(155deg, #97FCA6 0%, #F6C90F 100%);
+    background-image: linear-gradient(155deg, #97fca6 0%, #f6c90f 100%);
     background-repeat: no-repeat;
     -webkit-background-clip: text;
     background-clip: text;

@@ -10,20 +10,20 @@ interface Props {
   classes?: string;
 }
 
-export function CoinSelectComponent({ items, placeholder = 'Select value', onChange, value, classes }: Props) {
+export function CoinSelectComponent({ items, placeholder = "Select value", onChange, value, classes }: Props) {
   return (
     <div className="flex w-full flex-col gap-1">
       <Select onValueChange={(value) => onChange(value)} value={value}>
-        <SelectTrigger className={cn("min-w-[210px] bg-[#222] border-none ", classes)}>
+        <SelectTrigger className={cn("min-w-[210px] border-none bg-[#222]", classes)}>
           <SelectValue placeholder={placeholder} className="" />
         </SelectTrigger>
-        <SelectContent className="flex border-white/10 bg-[#222] rounded-xl">
+        <SelectContent className="flex rounded-xl border-white/10 bg-[#222]">
           <SelectGroup className="">
-            {items.map(({ label, value, Icon, multiply  }) => (
+            {items.map(({ label, value, Icon, multiply }) => (
               <SelectItem key={value} value={value} className="py-1">
-                <Icon className="mr-1"/>
+                <Icon className="mr-1" />
                 {label}
-                <span className="text-white/50 text-[12px]">{multiply}</span>
+                <span className="text-[12px] text-white/50">{multiply}</span>
               </SelectItem>
             ))}
           </SelectGroup>

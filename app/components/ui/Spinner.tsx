@@ -9,7 +9,7 @@ const Spinner: FC<Props> = ({ classes, ...props }) => {
     <div role="status" className={`flex items-center justify-center ${classes}`}>
       <svg
         aria-hidden="true"
-        className="fill-[#F6C90F] text-gray-1 animate-spin text-white/20"
+        className="text-gray-1 animate-spin fill-[#F6C90F] text-white/20"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

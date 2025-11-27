@@ -1,73 +1,96 @@
-import { FC, useState } from 'react';
+import { FC, useState } from "react";
 
-import { Bitcoin, ChevronDown, Cpu, Dog, Sun } from 'lucide-react';
-import Spinner from '../ui/Spinner';
-import { cn } from '@/app/lib/utils';
+import { Bitcoin, ChevronDown, Cpu, Dog, Sun } from "lucide-react";
+import Spinner from "../ui/Spinner";
+import { cn } from "@/app/lib/utils";
 
-interface Props {};
+interface Props {}
 
-const TEST_ADDRESS = '0xAbC123456789def'
+const TEST_ADDRESS = "0xAbC123456789def";
 
 const CURRENCIES = [
-  { label: 'BTC', value: 15000, Icon: Bitcoin },
-  { label: 'ETH', value: 2000, Icon: Cpu },
-  { label: 'DOG', value: 503421, Icon: Dog },
-  { label: 'SOL', value: 828, Icon: Sun },
-]
+  { label: "BTC", value: 15000, Icon: Bitcoin },
+  { label: "ETH", value: 2000, Icon: Cpu },
+  { label: "DOG", value: 503421, Icon: Dog },
+  { label: "SOL", value: 828, Icon: Sun },
+];
 
-const ConnectButton:FC<Props> = () => {
-  const [connect, setConnect] = useState(true)
-  const [loading, setLoading] = useState(false)
+const ConnectButton: FC<Props> = () => {
+  const [connect, setConnect] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  const [selectedCurrency, setCurrency] = useState(CURRENCIES[0])
+  const [selectedCurrency, setCurrency] = useState(CURRENCIES[0]);
 
   const handleClick = () => {
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
-      setLoading(false)
-      setConnect(true)
-    }, 3500)
-  }
+      setLoading(false);
+      setConnect(true);
+    }, 3500);
+  };
 
   return (
-    <div className=''>
+    <div className="">
       {!connect ? (
-        <button onClick={handleClick} className={cn("min-h-12  text-nowrap px-5 flex items-center font-medium leading-[140%] text-base rounded-2xl bg-linear-35 from-[#97FCA6]/10 to-[#F6C90F]/10", loading ? 'cursor-[initial]' : 'cursor-pointer')}>
+        <button
+          onClick={handleClick}
+          className={cn(
+            "flex min-h-12 items-center rounded-2xl bg-linear-35 from-[#97FCA6]/10 to-[#F6C90F]/10 px-5 text-base leading-[140%] font-medium text-nowrap",
+            loading ? "cursor-[initial]" : "cursor-pointer",
+          )}
+        >
           {loading ? (
-            <div className='w-[114px] flex gap-2 tex-sm items-center box-border'>
+            <div className="tex-sm box-border flex w-[114px] items-center gap-2">
               <Spinner width={24} height={24} />
-              <span className='text-white/50 font-medium'>{TEST_ADDRESS.slice(0, 3)}...{TEST_ADDRESS.slice(-4)}</span>
+              <span className="font-medium text-white/50">
+                {TEST_ADDRESS.slice(0, 3)}...{TEST_ADDRESS.slice(-4)}
+              </span>
             </div>
           ) : (
-            <span className='gradient-text'>Connect Wallet</span>
+            <span className="gradient-text">Connect Wallet</span>
           )}
         </button>
       ) : (
-          <div className='flex items-center relative'>
-            <button className='h-12 peer min-w-[126px] border gap-1 flex justify-center items-center border-white/10 border-r-transparent rounded-tl-xl rounded-bl-xl px-2.5'>
-              <selectedCurrency.Icon className='w-5 h-5' />
-              <span>{selectedCurrency.value}</span>
-            <ChevronDown className='w-4 h-4 text-white/50' />
+        <div className="relative flex items-center">
+          <button className="peer flex h-12 min-w-[126px] items-center justify-center gap-1 rounded-tl-xl rounded-bl-xl border border-white/10 border-r-transparent px-2.5">
+            <selectedCurrency.Icon className="h-5 w-5" />
+            <span>{selectedCurrency.value}</span>
+            <ChevronDown className="h-4 w-4 text-white/50" />
           </button>
 
-            {/* menu */}
-            <div className='flex flex-col justify-start gap-2 p-3 rounded-lg border border-white/10 bg-[#222] absolute z-10 top-10 opacity-0 transition-all duration-300 invisible select-none peer-focus:opacity-100 peer-focus:visible peer-focus:select-auto left-0 text-sm w-[calc(100%-48px)] *:text-start '>
-              {CURRENCIES.map((curr) => (
-                <button key={curr.label} onClick={() => setCurrency(curr)} className={cn('opacity-60', selectedCurrency.label === curr.label && 'opacity-100 text-white')} >
-                  {curr.label}: {curr.value.toLocaleString()}
-                </button>
-              ))}
-            </div>
-          <button className='bg-linear-135 cursor-pointer rounded-tr-xl rounded-br-xl flex items-center justify-center from-[#97FCA6] h-12 w-12 to-[#F6C90F]'>
-              {/* иконка кошелька */}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none" className='w-6 h-6'>
-              <path fillRule="evenodd" clipRule="evenodd" d="M10.8626 0.297645C9.80246 0.0770743 7.43965 0 6.07094 0C4.92076 0 3.8079 0.187654 2.68636 0.421649C1.35244 0.69937 0.455503 2.08611 0.263525 3.58106C0.100391 4.85059 0 6.11384 0 7.39506C0 7.68489 0.00325715 7.95284 0.00932915 8.20303C0.00323543 8.39315 0 8.59522 0 8.81172C0 10.2737 0.148184 11.0596 0.308801 11.9091L0.320855 11.9729C0.57972 13.3434 1.74245 14.4129 3.17167 14.6152L3.35837 14.6417C4.48382 14.8016 5.56645 14.9553 7.17654 14.9553C8.78668 14.9553 9.86932 14.8016 10.9948 14.6417L11.1816 14.6152C12.3548 14.4491 13.3666 13.6804 13.8288 12.6176C13.9756 12.2803 13.6887 11.9439 13.3209 11.942C13.1802 11.9415 13.0397 11.9397 12.899 11.938C12.7186 11.9359 12.5383 11.9337 12.3584 11.9337C10.6742 11.9337 9.30887 10.5684 9.30887 8.88411C9.30887 7.19988 10.6742 5.83455 12.3584 5.83455C12.5369 5.83455 12.7156 5.833 12.8944 5.83147C13.0182 5.8304 13.1421 5.82934 13.2658 5.82879C13.6402 5.82711 13.9229 5.47563 13.7552 5.14088C13.4736 4.57872 13.0284 4.1059 12.4818 3.77793C11.6036 3.31452 10.4689 3.21736 8.86586 3.21736C7.57768 3.21736 6.33718 3.31654 5.37915 3.39314C5.11981 3.41387 4.88117 3.43295 4.66789 3.44796C4.27437 3.47566 3.93292 3.1791 3.90523 2.78558C3.87752 2.39207 4.17408 2.0506 4.56761 2.02291C4.76228 2.00921 4.98695 1.99121 5.23591 1.97127C6.19461 1.89446 7.51343 1.78879 8.86586 1.78879C9.80794 1.78879 10.7103 1.81562 11.5472 1.97526C11.951 2.05226 12.3385 1.72795 12.158 1.35879C11.903 0.837587 11.4542 0.420745 10.8626 0.297645ZM12.3584 10.5051H13.9317C14.5629 10.5051 15.0745 9.99345 15.0745 9.36226V8.40596C15.0745 7.77479 14.5629 7.26312 13.9317 7.26312H12.3584C11.4632 7.26312 10.7374 7.98887 10.7374 8.88411C10.7374 9.77937 11.4632 10.5051 12.3584 10.5051Z" fill="#1E1E1E" />
+          {/* menu */}
+          <div className="invisible absolute top-10 left-0 z-10 flex w-[calc(100%-48px)] flex-col justify-start gap-2 rounded-lg border border-white/10 bg-[#222] p-3 text-sm opacity-0 transition-all duration-300 select-none *:text-start peer-focus:visible peer-focus:opacity-100 peer-focus:select-auto">
+            {CURRENCIES.map((curr) => (
+              <button
+                key={curr.label}
+                onClick={() => setCurrency(curr)}
+                className={cn("opacity-60", selectedCurrency.label === curr.label && "text-white opacity-100")}
+              >
+                {curr.label}: {curr.value.toLocaleString()}
+              </button>
+            ))}
+          </div>
+          <button className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-tr-xl rounded-br-xl bg-linear-135 from-[#97FCA6] to-[#F6C90F]">
+            {/* иконка кошелька */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="15"
+              viewBox="0 0 16 15"
+              fill="none"
+              className="h-6 w-6"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M10.8626 0.297645C9.80246 0.0770743 7.43965 0 6.07094 0C4.92076 0 3.8079 0.187654 2.68636 0.421649C1.35244 0.69937 0.455503 2.08611 0.263525 3.58106C0.100391 4.85059 0 6.11384 0 7.39506C0 7.68489 0.00325715 7.95284 0.00932915 8.20303C0.00323543 8.39315 0 8.59522 0 8.81172C0 10.2737 0.148184 11.0596 0.308801 11.9091L0.320855 11.9729C0.57972 13.3434 1.74245 14.4129 3.17167 14.6152L3.35837 14.6417C4.48382 14.8016 5.56645 14.9553 7.17654 14.9553C8.78668 14.9553 9.86932 14.8016 10.9948 14.6417L11.1816 14.6152C12.3548 14.4491 13.3666 13.6804 13.8288 12.6176C13.9756 12.2803 13.6887 11.9439 13.3209 11.942C13.1802 11.9415 13.0397 11.9397 12.899 11.938C12.7186 11.9359 12.5383 11.9337 12.3584 11.9337C10.6742 11.9337 9.30887 10.5684 9.30887 8.88411C9.30887 7.19988 10.6742 5.83455 12.3584 5.83455C12.5369 5.83455 12.7156 5.833 12.8944 5.83147C13.0182 5.8304 13.1421 5.82934 13.2658 5.82879C13.6402 5.82711 13.9229 5.47563 13.7552 5.14088C13.4736 4.57872 13.0284 4.1059 12.4818 3.77793C11.6036 3.31452 10.4689 3.21736 8.86586 3.21736C7.57768 3.21736 6.33718 3.31654 5.37915 3.39314C5.11981 3.41387 4.88117 3.43295 4.66789 3.44796C4.27437 3.47566 3.93292 3.1791 3.90523 2.78558C3.87752 2.39207 4.17408 2.0506 4.56761 2.02291C4.76228 2.00921 4.98695 1.99121 5.23591 1.97127C6.19461 1.89446 7.51343 1.78879 8.86586 1.78879C9.80794 1.78879 10.7103 1.81562 11.5472 1.97526C11.951 2.05226 12.3385 1.72795 12.158 1.35879C11.903 0.837587 11.4542 0.420745 10.8626 0.297645ZM12.3584 10.5051H13.9317C14.5629 10.5051 15.0745 9.99345 15.0745 9.36226V8.40596C15.0745 7.77479 14.5629 7.26312 13.9317 7.26312H12.3584C11.4632 7.26312 10.7374 7.98887 10.7374 8.88411C10.7374 9.77937 11.4632 10.5051 12.3584 10.5051Z"
+                fill="#1E1E1E"
+              />
             </svg>
           </button>
         </div>
       )}
-
     </div>
-  )
+  );
 };
-export default ConnectButton
+export default ConnectButton;

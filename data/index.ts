@@ -1,16 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
-import {
-  Bitcoin,
-  Zap,
-  Sun,
-  Star,
-  Circle,
-  Layers,
-  Repeat,
-  Grid,
-  Link2,
-  Hexagon,
-} from "lucide-react";
+import { Bitcoin, Zap, Sun, Star, Circle, Layers, Repeat, Grid, Link2, Hexagon } from "lucide-react";
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 

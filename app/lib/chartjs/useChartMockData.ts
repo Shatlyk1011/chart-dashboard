@@ -7,10 +7,10 @@ const opacityColor = "rgba(255,255,255,0.1)";
 const maxStepLength = 5;
 const firstAndLastLength = 2;
 const isLabelAvailable = false;
-const CHART_MIN_VALUE = 15000
-const CHART_MAX_VALUE = 19000
-const NUM_POINTS = 60
-const INTERVAL_TIME = 2000
+const CHART_MIN_VALUE = 15000;
+const CHART_MAX_VALUE = 19000;
+const NUM_POINTS = 60;
+const INTERVAL_TIME = 2000;
 
 // HELPER functions
 function createTimeGenerator(numSteps: number = NUM_POINTS) {
@@ -33,31 +33,26 @@ const getMinusVal = (number: number, length: number) => {
 const getLabelIndexes = function getIndicesElements(dates: string[]) {
   let minus = dates?.length > 16 ? getMinusVal(20, dates.length) : 0;
 
-    if (dates && dates.length > 7) {
-      const indices = [];
-      const firstElIdx = 0;
-      const lastElIdx = dates.length - 1;
-      const steps = Math.floor((dates.length - firstAndLastLength) / maxStepLength);
-      let currentStep = 0;
-      let bool = false;
-      for (let i = 0; i < maxStepLength; i++) {
-        currentStep = bool ? currentStep + steps : currentStep + steps - minus;
-        indices.push(dates[currentStep]);
-        bool = !bool;
-      }
-      const indexes = indices.map((idx) => dates.indexOf(idx));
+  if (dates && dates.length > 7) {
+    const indices = [];
+    const firstElIdx = 0;
+    const lastElIdx = dates.length - 1;
+    const steps = Math.floor((dates.length - firstAndLastLength) / maxStepLength);
+    let currentStep = 0;
+    let bool = false;
+    for (let i = 0; i < maxStepLength; i++) {
+      currentStep = bool ? currentStep + steps : currentStep + steps - minus;
+      indices.push(dates[currentStep]);
+      bool = !bool;
+    }
+    const indexes = indices.map((idx) => dates.indexOf(idx));
 
-      return [firstElIdx, ...indexes, lastElIdx];
-    } else return dates?.map((idx) => dates.indexOf(idx));
-  };
+    return [firstElIdx, ...indexes, lastElIdx];
+  } else return dates?.map((idx) => dates.indexOf(idx));
+};
 
-const useChartData = (
-  selectedCoin: string,
-  minValue = CHART_MIN_VALUE,
-  maxValue = CHART_MAX_VALUE
-) => {
-  const [realMockData, setRealMockData] =
-    useState<ChartData<"line", (number | Point | null)[], unknown>>();
+const useChartData = (selectedCoin: string, minValue = CHART_MIN_VALUE, maxValue = CHART_MAX_VALUE) => {
+  const [realMockData, setRealMockData] = useState<ChartData<"line", (number | Point | null)[], unknown>>();
 
   // Generate an array of mock data
   const generateRandomData = (numDatasets = 1, numPoints = NUM_POINTS) => {
@@ -261,4 +256,4 @@ const useChartData = (
   return { realMockData, options };
 };
 
-export default useChartData
+export default useChartData;
