@@ -16,7 +16,7 @@ const CURRENCIES = [
 ];
 
 const ConnectButton: FC<Props> = () => {
-  const [connect, setConnect] = useState(true);
+  const [connect, setConnect] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [selectedCurrency, setCurrency] = useState(CURRENCIES[0]);
